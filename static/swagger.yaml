@@ -1,0 +1,178 @@
+---
+openapi: 3.0.0
+info:
+  description: API que crea una base de datos y devuelve los resultados dependiendo
+    los parametros
+  version: 1.0.0
+  title: Chistes y Numeros API
+servers:
+- url: "/"
+components:
+  schemas:
+    Chistes:
+      type: object
+      properties:
+        id:
+          type: int
+        chiste:
+          type: string
+        tipo_chiste:
+          type: string
+paths:
+  /Chistes/{tipo}:
+    get:
+      tags:
+      - Chistes
+      summary: Devuelve chistes.
+      parameters:
+      - name: tipo
+        in: path
+        type: string
+        description: Selecciona tipo de chiste
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/components/schemas/Chistes"
+        '404':
+          description: NOT FOUND
+          schema:
+            "$ref": "#/components/schemas/Chistes"
+    post:
+      tags:
+      - Chistes
+      summary: Agrega chistes a db
+      parameters:
+      - name: tipo
+        in: path
+        type: string
+        description: Selecciona chiste
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Chistes"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/components/schemas/Chistes"
+        '404':
+          description: NOT FOUND
+          schema:
+            "$ref": "#/components/schemas/Chistes"
+  /Chistes/{id}:
+    delete:
+      tags:
+      - Chistes
+      summary: Elimina chiste de db
+      parameters:
+      - name: id
+        in: path
+        type: int
+        required: true
+        description: Busca por id
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Chistes"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/components/schemas/Chistes"
+        '404':
+          description: NOT FOUND
+          schema:
+            "$ref": "#/components/schemas/Chistes"
+  /Chistes/{id}/{texto}:
+    put:
+      tags:
+      - Chistes
+      summary: Actualiza chiste
+      parameters:
+      - name: id
+        in: path
+        type: int
+        required: true
+        description: Busca por id
+      - name: texto
+        in: path
+        type: str
+        required: true
+        description: Reemplaza chiste
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Chistes"
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/components/schemas/Chistes"
+        '404':
+          description: NOT FOUND
+          schema:
+            "$ref": "#/components/schemas/Chistes"
+  /Chistes/all:
+    get:
+      tags:
+      - Chistes
+      summary: Devuelve todos los chistes.
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/components/schemas/Chistes"
+        '404':
+          description: NOT FOUND
+          schema:
+            "$ref": "#/components/schemas/Chistes"
+  /Mates/MCM/:
+    get:
+      tags:
+      - Mates
+      summary: Devuelve Minimo comun multiplo
+      parameters:
+      - in: query
+        name: lista_numeros
+        required: true
+        schema:
+          type: array
+          items:
+            type: integer
+        style: form
+        explode: false
+        description: Lista de numeros
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/components/schemas/Chistes"
+        '404':
+          description: NOT FOUND
+          schema:
+            "$ref": "#/components/schemas/Chistes"
+  /Mates/suma/:
+    get:
+      tags:
+      - Mates
+      summary: Suma 1 al numero
+      parameters:
+      - name: numero
+        in: path
+        type: array
+        collectionFormat: multi
+        required: true
+        description: Numero
+      responses:
+        '200':
+          description: OK
+          schema:
+            "$ref": "#/components/schemas/Chistes"
+        '404':
+          description: NOT FOUND
+          schema:
+            "$ref": "#/components/schemas/Chistes"
